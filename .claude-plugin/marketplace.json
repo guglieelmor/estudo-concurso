@@ -1,0 +1,15 @@
+{
+  "name": "estudo-concurso",
+  "owner": { "name": "guglieelmor" },
+  "metadata": {
+    "description": "Plugins para estudo de concurso público"
+  },
+  "plugins": [
+    {
+      "name": "concurso",
+      "source": "./",
+      "description": "Lê o edital de um concurso público e gera cronograma diário, conteúdo da web e simulado com gabarito para cada dia até a prova.",
+      "category": "productivity"
+    }
+  ]
+}
