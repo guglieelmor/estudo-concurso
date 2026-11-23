@@ -1,8 +1,5 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/logo-dark.svg">
-    <img alt="Estudo para Concurso Público" src="docs/logo-light.svg" width="480">
-  </picture>
+  <img alt="Estudo para Concurso Público" src="docs/logo.svg" width="480">
 </p>
 
 > Passe o edital, receba o plano de estudo inteiro até o dia da prova.
