@@ -1,10 +1,10 @@
 # Gerar os dias de um bloco
 
-Você recebeu: o caminho da pasta do concurso, o caminho do navegador, as linhas do cronograma do seu bloco e este arquivo. Leia `edital.md` da pasta do concurso primeiro: ele dá a banca, o tipo de questão, o número de alternativas, o texto de cada tópico e as pegadinhas.
+Você recebeu: o caminho da pasta do concurso, o caminho do navegador, as linhas do cronograma do seu bloco e este arquivo. Leia `agentes/edital.md` da pasta do concurso primeiro: ele dá a banca, o tipo de questão, o número de alternativas, o texto de cada tópico e as pegadinhas.
 
 Para cada dia do bloco, em ordem:
 
-1. Pasta do dia: `<pasta do concurso>/dias/Dia NNN - (DD-MM-AAAA) - <Matérias>/`. Crie se não existir.
+1. Pasta do dia: `<pasta do concurso>/meus-estudos/Dia NNN - (DD-MM-AAAA) - <Matérias>/`. Crie se não existir.
 2. Se ela já tem `conteudo.pdf`, `simulado.pdf` e `gabarito.pdf`, pule. Apague `.tmp` que sobraram.
 3. Escreva os três documentos em HTML conforme o tipo do dia (abaixo) e converta cada um em PDF seguindo `pdf.md`. A estrutura mostrada abaixo em markdown é só o esqueleto: vire `<h1>`, `<h2>`, listas e links no HTML.
 4. **Escrita atômica:** o PDF nasce como `<nome>.pdf.tmp` e só vira `<nome>.pdf` depois de conferido. Gere `gabarito.pdf` por último. Na pasta do dia ficam só os três PDFs.
@@ -50,7 +50,7 @@ Matérias sem lei (Português, Raciocínio Lógico, Informática, Matemática…
 
 10 a 20 questões, numeradas, cobrando **só** o que está no `conteudo.pdf` deste dia, sem resposta no arquivo.
 - Cebraspe: itens certo/errado, com um texto-base curto quando fizer sentido. Termine cada item com `( ) Certo ( ) Errado`.
-- Múltipla escolha (FGV, FCC, Vunesp e outras): alternativas A–E; A–D se o `edital.md` disser 4 alternativas.
+- Múltipla escolha (FGV, FCC, Vunesp e outras): alternativas A–E; A–D se o `agentes/edital.md` disser 4 alternativas.
 - Imite o estilo da banca: Cebraspe troca uma palavra para tornar o item errado; FCC cobra a letra da lei; FGV usa casos práticos; Vunesp é mais direta.
 
 ### `gabarito.pdf`
@@ -68,7 +68,7 @@ Para cada questão: número, resposta e comentário de 1 a 4 linhas citando o ar
 
 - Sem busca na web.
 - `conteudo.pdf`: resumo de todas as matérias a partir dos `conteudo.pdf` existentes (leia com Read), priorizando as de maior peso e as pegadinhas do edital. Cada dia de revisão final foca matérias diferentes quando houver mais de um.
-- `simulado.pdf`: simulado com a estrutura real da prova, mesma proporção de questões por matéria do `edital.md`. Se a prova for grande, escale para 30 a 50 questões mantendo a proporção.
+- `simulado.pdf`: simulado com a estrutura real da prova, mesma proporção de questões por matéria do `agentes/edital.md`. Se a prova for grande, escale para 30 a 50 questões mantendo a proporção.
 - `gabarito.pdf`: como no dia de conteúdo, e no fim a regra de pontuação do edital (ex.: errada anula certa) para o estudante calcular a nota.
 
 ## Resposta ao orquestrador

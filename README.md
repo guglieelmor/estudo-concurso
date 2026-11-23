@@ -80,12 +80,12 @@ O único requisito é o Claude Code. O download por link usa o `curl` do sistema
 
 ```
 INSS 2026 - Técnico do Seguro Social (Cebraspe)/
-├── LEIA-ME.md        # cartão do concurso: cargo, banca, data, vagas, salário, avisos
+├── LEIA-ME.pdf       # cartão do concurso: cargo, banca, data, vagas, salário, avisos
 ├── edital.pdf        # o edital original
-├── edital.md         # resumo do edital (fonte usada na geração)
 ├── edital-resumido.pdf  # resumo do edital em PDF
-├── cronograma.md     # tabela dia a dia
-└── dias/
+├── cronograma.pdf    # tabela dia a dia
+├── agentes/          # markdown que os agentes leem (fonte dos PDFs acima)
+└── meus-estudos/
     ├── Dia 001 - (24-11-2026) - Direito Constitucional/
     │   ├── conteudo.pdf
     │   ├── simulado.pdf
@@ -99,10 +99,9 @@ INSS 2026 - Técnico do Seguro Social (Cebraspe)/
 
 | Arquivo | O que tem |
 | --- | --- |
-| `LEIA-ME.md` | Identificação do concurso, origem do edital, data de geração, tópicos sem fonte web |
-| `edital.md` | Estrutura da prova, conteúdo programático com códigos (`DC-01`, `PT-03`…), pegadinhas do edital |
-| `edital-resumido.pdf` | O mesmo resumo do `edital.md`, em PDF para ler ou imprimir |
-| `cronograma.md` | Dia, data, tipo (conteúdo, revisão, revisão final), matérias e tópicos |
+| `LEIA-ME.pdf` | Identificação do concurso, origem do edital, data de geração, tópicos sem fonte web |
+| `edital-resumido.pdf` | Estrutura da prova, conteúdo programático com códigos (`DC-01`, `PT-03`…), pegadinhas do edital |
+| `cronograma.pdf` | Dia, data, tipo (conteúdo, revisão, revisão final), matérias e tópicos |
 | `conteudo.pdf` | Resumo, artigos de lei, o que a banca cobra, pegadinhas e fontes com link |
 | `simulado.pdf` | 10 a 20 questões no formato da banca, só sobre o conteúdo do dia |
 | `gabarito.pdf` | Resposta e comentário de cada questão, com a fonte |
@@ -135,7 +134,7 @@ Os cronogramas não se coordenam entre si. Se você estudar para os dois ao mesm
 
 Rode `/concurso` de novo apontando para a pasta do concurso. O edital não é relido, e os dias que já estão completos são pulados. Só os dias que faltam são gerados.
 
-Quando a busca na web falha num tópico, o conteúdo é gerado mesmo assim, com o aviso `⚠ conteúdo sem fonte web, conferir lei atualizada` no topo. A lista desses tópicos fica no `LEIA-ME.md`.
+Quando a busca na web falha num tópico, o conteúdo é gerado mesmo assim, com o aviso `⚠ conteúdo sem fonte web, conferir lei atualizada` no topo. A lista desses tópicos fica no `LEIA-ME.pdf`.
 
 ## Cuidados
 

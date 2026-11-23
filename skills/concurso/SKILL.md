@@ -6,13 +6,13 @@ argument-hint: <caminho-do-edital.pdf | url-do-edital | pasta-do-concurso>
 
 # Estudo para concurso público
 
-Gera, a partir do edital, todo o material de estudo até a véspera da prova: resumo do edital, cronograma diário e, para cada dia, conteúdo com fontes, simulado no estilo da banca e gabarito comentado. Edital, cronograma e `LEIA-ME` em markdown; resumo do edital e todo o material dos dias em PDF; numa pasta por concurso, no diretório atual.
+Gera, a partir do edital, todo o material de estudo até a véspera da prova: resumo do edital, cronograma diário e, para cada dia, conteúdo com fontes, simulado no estilo da banca e gabarito comentado. Numa pasta por concurso, no diretório atual. O estudante só vê PDFs; os markdown que os agentes leem ficam em `agentes/`.
 
 Argumento recebido: `$ARGUMENTS`
 
 ## Antes de tudo: novo ou retomada?
 
-Se o argumento (ou o diretório atual, quando não há argumento) for uma pasta que contém `edital.md` e `cronograma.md`, é **retomada**: pule para a fase 7. Não releia o edital.
+Se o argumento (ou o diretório atual, quando não há argumento) for uma pasta que contém `agentes/edital.md` e `agentes/cronograma.md`, é **retomada**: pule para a fase 7. Não releia o edital.
 
 Sem argumento e sem pasta de concurso no diretório atual: peça o caminho ou a URL do edital.
 
@@ -24,24 +24,41 @@ Antes de qualquer fase, ache o navegador conforme `references/pdf.md`. Nenhum en
    - Caminho local: confirme que o arquivo existe.
    - URL: `curl -fsSL "<url>" -o "<scratch>/edital.pdf"` e confira o cabeçalho com `head -c 4 <arquivo>`. Se não for `%PDF`, pare e diga ao estudante que o link não é um PDF direto.
 2. **Ler o edital** seguindo `references/edital.md`. Se houver mais de um cargo, pergunte qual é o do estudante antes de continuar. Se o texto não sair (PDF escaneado), avise e pare.
-3. **Criar a pasta do concurso** (regras de nome abaixo), copiar o PDF para `edital.pdf` e gravar `edital.md`.
-4. **Confirmação 1.** Mostre cargo, banca, data da prova e a tabela de matérias (questões, peso, tipo). Data da prova ausente no edital: pergunte. Com a data da prova certa, pergunte quando o estudante pretende começar a estudar, já com uma sugestão: "A prova é em DD/MM/AAAA. Que dia você quer começar? Sugiro amanhã, DD/MM/AAAA, o que dá N dias de estudo." Aceite qualquer data de hoje até a véspera da prova; fora disso, explique e pergunte de novo. Grave em `edital.md`, em Datas, `Início dos estudos`. Corrija o `edital.md` com o que o estudante apontar. Só siga com o "ok" dele. Com o "ok", gere `edital-resumido.pdf` conforme `references/edital.md` e `references/pdf.md`.
-5. **Gerar `cronograma.md`** seguindo `references/cronograma.md`.
-6. **Confirmação 2.** Mostre total de dias, dias por matéria, dias de revisão, reserva final e os avisos de falta de tempo. Avise que serão gerados N dias com busca na web, o que leva tempo e consome bastante uso. Só siga com o "ok" dele.
+3. **Criar a pasta do concurso** (regras de nome abaixo), copiar o PDF para `edital.pdf` e gravar `agentes/edital.md`.
+4. **Confirmação 1.** Mostre cargo, banca, data da prova e a tabela de matérias (questões, peso, tipo). Data da prova ausente no edital: pergunte. Com a data da prova certa, pergunte quando o estudante pretende começar a estudar, já com uma sugestão: "A prova é em DD/MM/AAAA. Que dia você quer começar? Sugiro amanhã, DD/MM/AAAA, o que dá N dias de estudo." Aceite qualquer data de hoje até a véspera da prova; fora disso, explique e pergunte de novo. Grave em `agentes/edital.md`, em Datas, `Início dos estudos`. Corrija o `agentes/edital.md` com o que o estudante apontar. Só siga com o "ok" dele. Com o "ok", gere `edital-resumido.pdf` conforme `references/edital.md` e `references/pdf.md`.
+5. **Gerar `agentes/cronograma.md`** seguindo `references/cronograma.md`.
+6. **Confirmação 2.** Mostre total de dias, dias por matéria, dias de revisão, reserva final e os avisos de falta de tempo. Avise que serão gerados N dias com busca na web, o que leva tempo e consome bastante uso. Só siga com o "ok" dele. Com o "ok", gere `cronograma.pdf` a partir do `agentes/cronograma.md`, seguindo `references/pdf.md`.
 7. **Gerar os dias de conteúdo.** Liste os dias do tipo `conteúdo` cuja pasta não tem os três arquivos finais (`conteudo.pdf`, `simulado.pdf`, `gabarito.pdf`). Agrupe em blocos de até 7 dias e dispare um subagente (Agent, `general-purpose`) por bloco, no máximo 5 ao mesmo tempo. O prompt de cada um contém:
    - o caminho absoluto da pasta do concurso;
    - o caminho do navegador;
    - as linhas do bloco no cronograma (dia, data, tipo, matérias, códigos);
-   - a instrução: "Leia `<pasta do concurso>/edital.md` e siga à risca `<base>/references/dia.md` e `<base>/references/pdf.md`.", onde `<base>` é o "Base directory for this skill" mostrado ao carregar esta skill (caminho absoluto, já resolvido).
+   - a instrução: "Leia `<pasta do concurso>/agentes/edital.md` e siga à risca `<base>/references/dia.md` e `<base>/references/pdf.md`.", onde `<base>` é o "Base directory for this skill" mostrado ao carregar esta skill (caminho absoluto, já resolvido).
 8. **Gerar os dias de revisão e de revisão final**, mesma forma, depois que os dias de conteúdo que eles cobrem estiverem prontos. Dia de revisão cujo conteúdo coberto falhou: deixe pendente e registre.
-9. **Fechar.** Grave ou atualize o `LEIA-ME.md` (formato abaixo) e informe: dias gerados, dias que falharam, tópicos sem fonte web, e que rodar `/concurso "<pasta>"` de novo gera só o que faltou.
+9. **Fechar.** Grave ou atualize o `agentes/LEIA-ME.md` (formato abaixo), gere `LEIA-ME.pdf` a partir dele seguindo `references/pdf.md` e informe: dias gerados, dias que falharam, tópicos sem fonte web, e que rodar `/concurso "<pasta>"` de novo gera só o que faltou.
+
+## Pasta do concurso
+
+```
+<Pasta do concurso>/
+├── LEIA-ME.pdf
+├── edital.pdf             # original
+├── edital-resumido.pdf
+├── cronograma.pdf
+├── agentes/               # só markdown, fonte de cada PDF acima e lida pelos agentes
+│   ├── LEIA-ME.md
+│   ├── edital.md
+│   └── cronograma.md
+└── meus-estudos/          # só PDFs
+```
+
+Na raiz e em `meus-estudos/` não fica nenhum `.md`. Mudou um markdown em `agentes/`: regere o PDF correspondente.
 
 ## Nomes
 
 - Pasta do concurso: `<Órgão> <Ano> - <Cargo> (<Banca>)`, com espaços e acentos. Troque `/ \ : * ? " < > |` por `-`. Ex.: `INSS 2026 - Técnico do Seguro Social (Cebraspe)`.
-- Pasta do dia: `dias/Dia NNN - (DD-MM-AAAA) - <Matérias>`, número com 3 dígitos, data entre parênteses com hífen (nome de pasta não aceita `/`), matérias unidas por ` + `. Revisão semanal: `Revisão`. Reserva final: `Revisão Final`.
+- Pasta do dia: `meus-estudos/Dia NNN - (DD-MM-AAAA) - <Matérias>`, número com 3 dígitos, data entre parênteses com hífen (nome de pasta não aceita `/`), matérias unidas por ` + `. Revisão semanal: `Revisão`. Reserva final: `Revisão Final`.
 
-## `LEIA-ME.md`
+## `agentes/LEIA-ME.md`
 
 ```markdown
 # <Órgão> <Ano> - <Cargo> (<Banca>)

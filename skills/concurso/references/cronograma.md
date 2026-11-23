@@ -4,7 +4,7 @@ Calcule as datas com `date` no Bash (ex.: `date -d "tomorrow" +%F`, `date -d "20
 
 ## Regras, nesta ordem
 
-1. **Período.** Do `Início dos estudos` gravado no `edital.md` até a véspera da prova, todos os dias, inclusive fins de semana. `T` = total de dias.
+1. **Período.** Do `Início dos estudos` gravado no `agentes/edital.md` até a véspera da prova, todos os dias, inclusive fins de semana. `T` = total de dias.
 2. **Reserva final.** Os últimos `max(3, ceil(T × 0,10))` dias são `revisão final`: revisão geral e simulado completo no formato real da prova.
 3. **Revisão semanal.** Nos dias restantes, cada 7º dia (dia 7, 14, 21…) é `revisão` dos tópicos estudados nos 6 dias anteriores.
 4. **Dias de conteúdo.** Os demais. Cada dia de conteúdo tem 2 slots (2 matérias). `S` = 2 × dias de conteúdo.
@@ -17,9 +17,9 @@ Calcule as datas com `date` no Bash (ex.: `date -d "tomorrow" +%F`, `date -d "20
 
 Quando algum slot recebe mais de 3 tópicos, ou alguma matéria fica com menos slots que a metade dos seus tópicos, há falta de tempo:
 - agrupe primeiro os tópicos das matérias de menor peso;
-- escreva o aviso no topo do `cronograma.md` e repita na confirmação 2, dizendo quais matérias ficaram comprimidas.
+- escreva o aviso no topo do `agentes/cronograma.md` e repita na confirmação 2, dizendo quais matérias ficaram comprimidas.
 
-## Formato do `cronograma.md`
+## Formato do `agentes/cronograma.md`
 
 ```markdown
 # Cronograma — <Órgão> <Ano> - <Cargo> (<Banca>)

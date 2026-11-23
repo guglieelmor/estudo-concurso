@@ -12,7 +12,7 @@
 
 Cada matéria ganha uma sigla de 2 a 3 letras maiúsculas, única no edital (Direito Constitucional `DC`, Português `PT`, Raciocínio Lógico `RL`, Direito Administrativo `DA`, Informática `INF`…). Cada item do conteúdo programático vira `<SIGLA>-NN`, na ordem do edital. Item muito longo, com vários assuntos separados por ponto e vírgula, pode ser quebrado em vários códigos; item curto e relacionado ao vizinho pode ficar junto. Mantenha o texto como aparece no edital.
 
-## Formato do `edital.md`
+## Formato do `agentes/edital.md`
 
 ```markdown
 # Edital — <Órgão> <Ano> - <Cargo> (<Banca>)
@@ -62,4 +62,4 @@ Se o tipo de questão não estiver explícito, deduza pela banca: Cebraspe = cer
 
 ## Gerar `edital-resumido.pdf`
 
-Depois do "ok" da confirmação 1, converta o `edital.md` final em `<pasta do concurso>/edital-resumido.pdf` seguindo `pdf.md`. O `edital.md` fica: é a fonte que os subagentes leem.
+Depois do "ok" da confirmação 1, converta o `agentes/edital.md` final em `<pasta do concurso>/edital-resumido.pdf` seguindo `pdf.md`. O markdown fica em `agentes/`: é a fonte que os subagentes leem.
