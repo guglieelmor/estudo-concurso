@@ -1,4 +1,4 @@
-# Skill `concurso` — Design
+# Estudo para Concurso Público (skill `concurso`) — Design
 
 Data: 2026-11-23
 Status: aprovado em brainstorming, aguardando revisão da spec

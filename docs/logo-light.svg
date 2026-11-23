@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="220" viewBox="0 0 720 220" font-family="Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <!-- icon: calendar page with check -->
+  <g transform="translate(20,20)">
+    <rect width="180" height="180" rx="36" fill="#1b4d6b"/>
+    <rect x="34" y="44" width="112" height="104" rx="12" fill="#ffffff"/>
+    <rect x="34" y="44" width="112" height="28" rx="12" fill="#f5b942"/>
+    <rect x="34" y="60" width="112" height="12" fill="#f5b942"/>
+    <rect x="58" y="32" width="10" height="24" rx="5" fill="#0f2a44"/>
+    <rect x="112" y="32" width="10" height="24" rx="5" fill="#0f2a44"/>
+    <path d="M62 110 l20 20 l38 -42" fill="none" stroke="#3a9d6a" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="236" y="102" font-size="54" font-weight="800" fill="#0f2a44">Estudo para</text>
+  <text x="236" y="162" font-size="54" font-weight="800" fill="#0f2a44">Concurso Público</text>
+  <text x="236" y="198" font-size="22" fill="#55697a"><tspan fill="#f5b942" font-family="'JetBrains Mono', 'Fira Code', Menlo, Consolas, monospace">/concurso</tspan>  ·  plugin para Claude Code</text>
+</svg>
