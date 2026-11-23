@@ -6,7 +6,7 @@ argument-hint: <caminho-do-edital.pdf | url-do-edital | pasta-do-concurso>
 
 # Estudo para concurso público
 
-Gera, a partir do edital, todo o material de estudo até a véspera da prova: resumo do edital, cronograma diário e, para cada dia, conteúdo com fontes, simulado no estilo da banca e gabarito comentado. Tudo em markdown, numa pasta por concurso, no diretório atual.
+Gera, a partir do edital, todo o material de estudo até a véspera da prova: resumo do edital, cronograma diário e, para cada dia, conteúdo com fontes, simulado no estilo da banca e gabarito comentado. Tudo em markdown (mais o resumo do edital em PDF), numa pasta por concurso, no diretório atual.
 
 Argumento recebido: `$ARGUMENTS`
 
@@ -23,7 +23,7 @@ Sem argumento e sem pasta de concurso no diretório atual: peça o caminho ou a 
    - URL: `curl -fsSL "<url>" -o "<scratch>/edital.pdf"` e confira o cabeçalho com `head -c 4 <arquivo>`. Se não for `%PDF`, pare e diga ao estudante que o link não é um PDF direto.
 2. **Ler o edital** seguindo `references/edital.md`. Se houver mais de um cargo, pergunte qual é o do estudante antes de continuar. Se o texto não sair (PDF escaneado), avise e pare.
 3. **Criar a pasta do concurso** (regras de nome abaixo), copiar o PDF para `edital.pdf` e gravar `edital.md`.
-4. **Confirmação 1.** Mostre cargo, banca, data da prova e a tabela de matérias (questões, peso, tipo). Data da prova ausente no edital: pergunte. Corrija o `edital.md` com o que o estudante apontar. Só siga com o "ok" dele.
+4. **Confirmação 1.** Mostre cargo, banca, data da prova e a tabela de matérias (questões, peso, tipo). Data da prova ausente no edital: pergunte. Corrija o `edital.md` com o que o estudante apontar. Só siga com o "ok" dele. Com o "ok", gere `edital-resumido.pdf` conforme `references/edital.md`.
 5. **Gerar `cronograma.md`** seguindo `references/cronograma.md`.
 6. **Confirmação 2.** Mostre total de dias, dias por matéria, dias de revisão, reserva final e os avisos de falta de tempo. Avise que serão gerados N dias com busca na web, o que leva tempo e consome bastante uso. Só siga com o "ok" dele.
 7. **Gerar os dias de conteúdo.** Liste os dias do tipo `conteúdo` cuja pasta não tem os três arquivos finais (`conteudo.md`, `simulado.md`, `gabarito.md`). Agrupe em blocos de até 7 dias e dispare um subagente (Agent, `general-purpose`) por bloco, no máximo 5 ao mesmo tempo. O prompt de cada um contém:

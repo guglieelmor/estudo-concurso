@@ -74,7 +74,7 @@ Na pasta onde quer guardar seus estudos, rode a skill com o edital:
 /concurso https://cdn.cebraspe.org.br/concursos/inss_26/arquivos/ED_1.PDF
 ```
 
-O único requisito é o Claude Code. O download por link usa o `curl` do sistema.
+O único requisito é o Claude Code. O download por link usa o `curl` do sistema. O `edital-resumido.pdf` usa Chrome, Chromium, Edge ou Brave em modo headless; sem navegador, só ele não é gerado.
 
 ## O que é gerado
 
@@ -82,7 +82,8 @@ O único requisito é o Claude Code. O download por link usa o `curl` do sistema
 INSS 2026 - Técnico do Seguro Social (Cebraspe)/
 ├── LEIA-ME.md        # cartão do concurso: cargo, banca, data, vagas, salário, avisos
 ├── edital.pdf        # o edital original
-├── edital.md         # resumo do edital
+├── edital.md         # resumo do edital (fonte usada na geração)
+├── edital-resumido.pdf  # resumo do edital em PDF
 ├── cronograma.md     # tabela dia a dia
 └── dias/
     ├── Dia 001 - 24-11 - Direito Constitucional/
@@ -100,6 +101,7 @@ INSS 2026 - Técnico do Seguro Social (Cebraspe)/
 | --- | --- |
 | `LEIA-ME.md` | Identificação do concurso, origem do edital, data de geração, tópicos sem fonte web |
 | `edital.md` | Estrutura da prova, conteúdo programático com códigos (`DC-01`, `PT-03`…), pegadinhas do edital |
+| `edital-resumido.pdf` | O mesmo resumo do `edital.md`, em PDF para ler ou imprimir |
 | `cronograma.md` | Dia, data, tipo (conteúdo, revisão, revisão final), matérias e tópicos |
 | `conteudo.md` | Resumo, artigos de lei, o que a banca cobra, pegadinhas e fontes com link |
 | `simulado.md` | 10 a 20 questões no formato da banca, só sobre o conteúdo do dia |
