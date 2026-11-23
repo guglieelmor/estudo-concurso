@@ -35,13 +35,6 @@ O edital tem 80 páginas, a prova é daqui a três meses e a primeira semana vai
   <img alt="Fluxo: edital, resumo, cronograma e material de cada dia" src="docs/banner.svg" width="100%">
 </p>
 
-```
-edital ──▶ resumo ──▶ cronograma ──▶ dias
-PDF ou     matérias,  até a véspera   conteúdo + simulado + gabarito,
-link       pesos,     da prova        gerados em paralelo
-           data
-```
-
 A skill confirma com você duas vezes, porque um erro nessas etapas contamina todo o resto:
 
 1. **Depois de ler o edital:** você confere as matérias, os pesos e a data. Se o edital tiver vários cargos, ela pergunta qual é o seu.
