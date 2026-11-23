@@ -29,6 +29,7 @@ Cada matéria ganha uma sigla de 2 a 3 letras maiúsculas, única no edital (Dir
 - Prova discursiva:
 - Inscrição:
 - Pedido de isenção:
+- Início dos estudos: <data escolhida pelo estudante na confirmação 1>
 
 ## Vagas, remuneração, requisitos e taxa
 - Vagas:
@@ -61,11 +62,4 @@ Se o tipo de questão não estiver explícito, deduza pela banca: Cebraspe = cer
 
 ## Gerar `edital-resumido.pdf`
 
-Depois do "ok" da confirmação 1, converta o `edital.md` final em `edital-resumido.pdf` na pasta do concurso. O `edital.md` fica: é a fonte que os subagentes leem.
-
-1. Escreva `<scratch>/edital-resumido.html` com o mesmo conteúdo do `edital.md` em HTML simples: `<meta charset="utf-8">`, tabelas com borda, fonte sem serifa, `@page { margin: 2cm }`.
-2. Ache um navegador: `command -v google-chrome google-chrome-stable chromium chromium-browser microsoft-edge brave-browser | head -1`. No macOS, teste também `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`.
-3. Rode `"<navegador>" --headless --disable-gpu --no-pdf-header-footer --print-to-pdf="<pasta do concurso>/edital-resumido.pdf" "file://<scratch>/edital-resumido.html"`.
-4. Confira com `head -c 4` que o arquivo começa com `%PDF`.
-
-Nenhum navegador encontrado, ou a conversão falhou: avise o estudante, siga sem o PDF e registre em Pendências do `LEIA-ME.md`.
+Depois do "ok" da confirmação 1, converta o `edital.md` final em `<pasta do concurso>/edital-resumido.pdf` seguindo `pdf.md`. O `edital.md` fica: é a fonte que os subagentes leem.

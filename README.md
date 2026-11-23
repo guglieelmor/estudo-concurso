@@ -22,7 +22,7 @@ O edital tem 80 páginas, a prova é daqui a três meses e a primeira semana vai
 
 - **Entrega um simulado por dia.** Questões no formato da banca: certo/errado no Cebraspe e cinco alternativas na FGV, FCC e Vunesp. O simulado cobra só o que você estudou naquele dia, e o gabarito comenta cada questão, citando o artigo.
 
-- **Tudo em arquivos simples.** Uma pasta por concurso, uma pasta por dia, tudo em markdown. Abra no editor, no Obsidian ou imprima. Nada fica preso dentro do chat.
+- **Tudo em arquivos simples.** Uma pasta por concurso, uma pasta por dia, material de estudo em PDF. Abra em qualquer leitor ou imprima. Nada fica preso dentro do chat.
 
 - **É honesta sobre os limites.** Conteúdo sem fonte web leva um aviso no topo. A data de geração fica registrada, porque a lei muda. Antes de começar, a skill mostra quantos dias vai gerar.
 
@@ -74,7 +74,7 @@ Na pasta onde quer guardar seus estudos, rode a skill com o edital:
 /concurso https://cdn.cebraspe.org.br/concursos/inss_26/arquivos/ED_1.PDF
 ```
 
-O único requisito é o Claude Code. O download por link usa o `curl` do sistema. O `edital-resumido.pdf` usa Chrome, Chromium, Edge ou Brave em modo headless; sem navegador, só ele não é gerado.
+O único requisito é o Claude Code. O download por link usa o `curl` do sistema. Os PDFs são gerados com Chrome, Chromium, Edge ou Brave em modo headless, então um deles precisa estar instalado.
 
 ## O que é gerado
 
@@ -86,15 +86,15 @@ INSS 2026 - Técnico do Seguro Social (Cebraspe)/
 ├── edital-resumido.pdf  # resumo do edital em PDF
 ├── cronograma.md     # tabela dia a dia
 └── dias/
-    ├── Dia 001 - 24-11 - Direito Constitucional/
-    │   ├── conteudo.md
-    │   ├── simulado.md
-    │   └── gabarito.md
-    ├── Dia 002 - 25-11 - Português + Raciocínio Lógico/
+    ├── Dia 001 - (24-11-2026) - Direito Constitucional/
+    │   ├── conteudo.pdf
+    │   ├── simulado.pdf
+    │   └── gabarito.pdf
+    ├── Dia 002 - (25-11-2026) - Português + Raciocínio Lógico/
     ├── ...
-    ├── Dia 007 - 30-11 - Revisão/
+    ├── Dia 007 - (30-11-2026) - Revisão/
     ├── ...
-    └── Dia 090 - 21-02 - Revisão Final/
+    └── Dia 090 - (21-02-2027) - Revisão Final/
 ```
 
 | Arquivo | O que tem |
@@ -103,11 +103,11 @@ INSS 2026 - Técnico do Seguro Social (Cebraspe)/
 | `edital.md` | Estrutura da prova, conteúdo programático com códigos (`DC-01`, `PT-03`…), pegadinhas do edital |
 | `edital-resumido.pdf` | O mesmo resumo do `edital.md`, em PDF para ler ou imprimir |
 | `cronograma.md` | Dia, data, tipo (conteúdo, revisão, revisão final), matérias e tópicos |
-| `conteudo.md` | Resumo, artigos de lei, o que a banca cobra, pegadinhas e fontes com link |
-| `simulado.md` | 10 a 20 questões no formato da banca, só sobre o conteúdo do dia |
-| `gabarito.md` | Resposta e comentário de cada questão, com a fonte |
+| `conteudo.pdf` | Resumo, artigos de lei, o que a banca cobra, pegadinhas e fontes com link |
+| `simulado.pdf` | 10 a 20 questões no formato da banca, só sobre o conteúdo do dia |
+| `gabarito.pdf` | Resposta e comentário de cada questão, com a fonte |
 
-Para o dia a dia: abra a pasta do dia, estude o `conteudo.md`, resolva o `simulado.md` e só então confira o `gabarito.md`.
+Para o dia a dia: abra a pasta do dia, estude o `conteudo.pdf`, resolva o `simulado.pdf` e só então confira o `gabarito.pdf`.
 
 ## Bancas suportadas
 

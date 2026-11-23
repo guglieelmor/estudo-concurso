@@ -1,10 +1,10 @@
 # Montar o cronograma
 
-Calcule as datas com `date` no Bash (ex.: `date -d "tomorrow" +%F`, `date -d "2026-11-24 +1 day" +%d-%m`), nunca de cabeça.
+Calcule as datas com `date` no Bash (ex.: `date -d "tomorrow" +%F`, `date -d "2026-11-24 +1 day" +%d-%m-%Y`), nunca de cabeça.
 
 ## Regras, nesta ordem
 
-1. **Período.** De amanhã até a véspera da prova, todos os dias, inclusive fins de semana. `T` = total de dias.
+1. **Período.** Do `Início dos estudos` gravado no `edital.md` até a véspera da prova, todos os dias, inclusive fins de semana. `T` = total de dias.
 2. **Reserva final.** Os últimos `max(3, ceil(T × 0,10))` dias são `revisão final`: revisão geral e simulado completo no formato real da prova.
 3. **Revisão semanal.** Nos dias restantes, cada 7º dia (dia 7, 14, 21…) é `revisão` dos tópicos estudados nos 6 dias anteriores.
 4. **Dias de conteúdo.** Os demais. Cada dia de conteúdo tem 2 slots (2 matérias). `S` = 2 × dias de conteúdo.
@@ -39,9 +39,9 @@ Quando algum slot recebe mais de 3 tópicos, ou alguma matéria fica com menos s
 
 | Dia | Data | Tipo | Matérias | Tópicos |
 | --- | --- | --- | --- | --- |
-| 001 | 24-11 | conteúdo | Direito Constitucional + Português | DC-01, DC-02; PT-01 |
-| 007 | 30-11 | revisão | Revisão | dias 001–006 |
-| 090 | 21-02 | revisão final | Revisão Final | todas as matérias |
+| 001 | 24-11-2026 | conteúdo | Direito Constitucional + Português | DC-01, DC-02; PT-01 |
+| 007 | 30-11-2026 | revisão | Revisão | dias 001–006 |
+| 090 | 21-02-2027 | revisão final | Revisão Final | todas as matérias |
 ```
 
-A coluna Matérias é a mesma que vai no nome da pasta do dia.
+As colunas Data (`DD-MM-AAAA`) e Matérias são as mesmas que vão no nome da pasta do dia.
