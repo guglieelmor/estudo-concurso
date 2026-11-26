@@ -95,3 +95,4 @@ py "%USERPROFILE%\.config\notifica-concurso\notificador.py" --perfil "%USERPROFI
 schtasks /Create /TN NotificaConcurso08 /SC DAILY /ST 08:00 /TR "%USERPROFILE%\.config\notifica-concurso\rodar.cmd"
 schtasks /Create /TN NotificaConcurso18 /SC DAILY /ST 18:00 /TR "%USERPROFILE%\.config\notifica-concurso\rodar.cmd"
 ```
+Desligar: `schtasks /Delete /TN NotificaConcurso08 /F` e o mesmo para `NotificaConcurso18`.
