@@ -45,9 +45,9 @@ Uma pergunta por vez, só as que a fonte não respondeu. Sempre com sugestão:
 
 - `palavras`: 3 a 8 termos que aparecem em títulos do PCI, sem acento e em minúsculas. Exemplos: `tecnologia da informacao`, `analista de ti`, `analista de sistemas`. Use termos compostos. A palavra solta `ti` casa só com a palavra inteira, mas é ambígua: prefira `analista de ti`. Se o candidato aceita qualquer área, deixe `[]`.
 - `estados`: nomes como o PCI usa, sem acento e em maiúsculas (`NACIONAL`, `SAO PAULO`, `DISTRITO FEDERAL`). Nacional total: `[]`.
-- `resumo`: uma frase com formação, experiência principal e cidade. É o que o agente diário usa para julgar compatibilidade.
+- `resumo`: uma frase com formação, experiência principal e cidade. Entra no `perfil-concurso.md` (análise); o aviso diário ignora.
 - Mostre ao candidato quantos concursos abertos hoje passam no filtro:
-  `python3 <notificador>/notificador.py --perfil <perfil.json> --listar` e conte os itens. Zero: afrouxe as palavras. Mais de 60: aperte.
+  o `perfil.json` ainda não existe: grave `{"palavras":[...],"estados":[...]}` num temporário (`F=$(mktemp)`) e rode `python3 <notificador>/notificador.py --perfil "$F" --listar`. Conte os itens. Zero: afrouxe as palavras. Mais de 60: aperte.
 
 ## `perfil-concurso.md`
 

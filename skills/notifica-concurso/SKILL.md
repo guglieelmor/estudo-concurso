@@ -12,16 +12,20 @@ Argumento recebido: `$ARGUMENTS`
 
 `<base>` = o "Base directory for this skill". `<notificador>` = `<base>/../../notificador` (caminho absoluto). `<cfg>` = `~/.config/notifica-concurso`.
 
+No Windows (Bash do Claude Code = Git Bash): use `py` no lugar de `python3`, rode `schtasks` como `MSYS_NO_PATHCONV=1 schtasks ...` e semeie pelo `rodar.cmd` (detalhes em `references/modos.md`).
+
 ## Antes de tudo: já configurado?
 
 Se `<cfg>/perfil.json` existir, mostre o resumo, as palavras, os estados e o modo e pergunte: **editar** (vá à fase 3 com o perfil atual, mantém o tópico), **recomeçar** (fase 1) ou **desligar** (procedimento "Desligar" do modo em `references/modos.md`, depois apague `<cfg>`).
+
+Em editar/recomeçar: se o modo mudar, rode antes o "Desligar" do modo anterior; no modo github, sempre regrave o secret (passo 3 de `references/modos.md`). No modo local, o script lê o `perfil.json` direto, nada a refazer.
 
 ## Fases
 
 1. **Perfil.** Sem argumento, peça: "Me passe o link do seu LinkedIn, do seu site pessoal ou o caminho do seu currículo em PDF." Leia conforme `references/perfil.md`.
 2. **Extrair** os campos de `references/perfil.md` e mostrar ao candidato numa tabela.
 3. **Perguntas complementares**, uma por vez, conforme `references/perfil.md`.
-4. **Análise.** Monte o filtro e o `perfil-concurso.md` conforme `references/perfil.md`, no diretório atual. Mostre e ajuste até o "ok". Com o "ok", gere `perfil-concurso.pdf` seguindo `<base>/../concurso/references/pdf.md`.
+4. **Análise.** Monte o filtro e o `perfil-concurso.md` conforme `references/perfil.md`, no diretório atual (se for um repositório git, `git rev-parse --is-inside-work-tree`, avise que `perfil-concurso.*` tem dados do currículo e não deve ir para repositório público). Mostre e ajuste até o "ok". Com o "ok", gere `perfil-concurso.pdf` seguindo `<base>/../concurso/references/pdf.md`.
 5. **Gravar** `<cfg>/perfil.json` com `topico`, `palavras`, `estados`, `salario_minimo`, `resumo` (o `modo` entra na fase 7). Tópico novo: `concursos-` mais `python3 -c "import secrets; print(secrets.token_hex(4))"`.
 6. **ntfy.** Explique:
    > Instale o app **ntfy** (Play Store, App Store ou F-Droid), toque em **+** e assine o tópico `<topico>`. Esse nome funciona como senha: quem souber recebe seus avisos.

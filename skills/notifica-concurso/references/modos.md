@@ -5,7 +5,7 @@
 
 ## GitHub Actions (`modo: "github"`)
 
-1. `gh auth status`. Se falhar, peça ao candidato para rodar `! gh auth login` e espere.
+1. `gh auth status`. Se o `gh` não existir, peça para instalar em https://cli.github.com. Se falhar, peça ao candidato para rodar `! gh auth login` e espere.
 2. Crie o repositório num diretório temporário:
    ```bash
    T=$(mktemp -d) && cd "$T"
@@ -14,7 +14,7 @@
    mkdir -p .github/workflows && cp "<notificador>/notificador.yml" .github/workflows/
    git add . && git commit -m "notificador de concursos" && git push -u origin HEAD
    ```
-   Se o repositório já existir (erro "Name already exists"), use `gh repo clone notifica-concurso`, sobrescreva os dois arquivos e faça push.
+   Se o repositório já existir (erro "Name already exists"), use `gh repo clone notifica-concurso`, confira `gh repo view notifica-concurso --json visibility -q .visibility` e pare se não for `PRIVATE`; sobrescreva os dois arquivos e faça push.
 3. Secret com o perfil (lista com um item):
    ```bash
    python3 -c "import json,sys; print(json.dumps([json.load(open(sys.argv[1]))]))" <cfg>/perfil.json | gh secret set USUARIOS -R "$(gh api user -q .login)/notifica-concurso"
@@ -25,7 +25,7 @@
 ## Local (`modo: "local"`)
 
 Copie o script: `cp "<notificador>/notificador.py" <cfg>/`. Comando que o agendador roda:
-`python3 <cfg>/notificador.py --perfil <cfg>/perfil.json`, com `VISTOS=<cfg>/vistos.txt`. Rode-o uma vez à mão agora (semeia).
+`python3 <cfg>/notificador.py --perfil <cfg>/perfil.json`, com `VISTOS=<cfg>/vistos.txt`. Rode-o uma vez à mão agora (semeia). No Windows, semeie pelo `rodar.cmd` (abaixo).
 
 ### Linux (systemd)
 
@@ -81,9 +81,12 @@ Desligar: `systemctl --user disable --now notifica-concurso.timer`.
   </array>
 </dict></plist>
 ```
+Se `command -v python3` não for `/usr/bin/python3`, troque pelo caminho que ele mostrar.
 `launchctl load ~/Library/LaunchAgents/br.concurso.notifica.plist`. Desligar: `launchctl unload` no mesmo arquivo e apagá-lo.
 
 ### Windows (Agendador de Tarefas)
+
+No Git Bash do Claude Code: `py` no lugar de `python3`; `schtasks` como `MSYS_NO_PATHCONV=1 schtasks ...` (senão `/Create` vira caminho); `/TR` com aspas internas, que aguentam espaços. Semeie rodando o próprio `rodar.cmd`: `cmd //c "%USERPROFILE%\.config\notifica-concurso\rodar.cmd"`.
 
 Grave `%USERPROFILE%\.config\notifica-concurso\rodar.cmd`:
 ```bat
@@ -92,7 +95,7 @@ set VISTOS=%USERPROFILE%\.config\notifica-concurso\vistos.txt
 py "%USERPROFILE%\.config\notifica-concurso\notificador.py" --perfil "%USERPROFILE%\.config\notifica-concurso\perfil.json"
 ```
 ```bat
-schtasks /Create /TN NotificaConcurso08 /SC DAILY /ST 08:00 /TR "%USERPROFILE%\.config\notifica-concurso\rodar.cmd"
-schtasks /Create /TN NotificaConcurso18 /SC DAILY /ST 18:00 /TR "%USERPROFILE%\.config\notifica-concurso\rodar.cmd"
+schtasks /Create /TN NotificaConcurso08 /SC DAILY /ST 08:00 /TR "\"%USERPROFILE%\.config\notifica-concurso\rodar.cmd\""
+schtasks /Create /TN NotificaConcurso18 /SC DAILY /ST 18:00 /TR "\"%USERPROFILE%\.config\notifica-concurso\rodar.cmd\""
 ```
 Desligar: `schtasks /Delete /TN NotificaConcurso08 /F` e o mesmo para `NotificaConcurso18`.

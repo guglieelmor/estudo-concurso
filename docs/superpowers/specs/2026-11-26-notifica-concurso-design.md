@@ -14,7 +14,7 @@ A skill é self-service: cada pessoa que instala o plugin configura o próprio p
 - Rodar `/concurso` automaticamente quando chegar um edital.
 - Canais além do ntfy (Telegram, e-mail).
 - Fontes além do PCI Concursos.
-- Filtro por salário no script (o PCI só mostra "até R$ X"). O salário mínimo informado entra na análise e no modo Claude agendado, mas não no filtro por palavra-chave.
+- Filtro por salário no script (o PCI só mostra "até R$ X"). O salário mínimo informado entra na análise, mas não no filtro por palavra-chave.
 - Vários perfis por máquina. Rodar a skill de novo substitui o perfil.
 
 ## Público
@@ -28,8 +28,7 @@ skills/notifica-concurso/
 ├── SKILL.md                  # orquestrador: fases e perguntas
 └── references/
     ├── perfil.md             # como extrair o perfil e o formato da análise
-    ├── modos.md              # instalação de cada modo de execução
-    └── agente-diario.md      # prompt do agente agendado (modo Claude)
+    └── modos.md              # instalação de cada modo de execução
 notificador/
 ├── notificador.py            # verificador determinístico (já existe)
 ├── test_notificador.py
@@ -117,5 +116,5 @@ O modo instalado fica gravado no próprio `perfil.json` (campo `modo`).
 
 ## Riscos
 
-- Mudança de layout do PCI quebra o script, que falha com uma mensagem clara. O modo Claude é mais tolerante.
+- Mudança de layout do PCI quebra o script, que falha com uma mensagem clara. Sem o modo Claude na v1, o conserto é atualizar o script.
 - Tópico do ntfy vazado: qualquer um lê os avisos ou manda spam. A mitigação é o tópico aleatório. Para trocar, basta rodar a skill de novo e escolher "editar".
