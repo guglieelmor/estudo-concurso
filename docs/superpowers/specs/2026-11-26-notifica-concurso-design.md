@@ -64,18 +64,20 @@ O `.github/workflows/notificador.yml` sai da raiz deste repositório e vira `not
    ```
    `palavras` e `estados` seguem as regras do `notificador.py`: vazio aceita tudo, sem diferença de acento e maiúscula, `estados` pelo nome usado no PCI (`NACIONAL`, `SAO PAULO`).
 6. **Configurar o ntfy.** Gerar `topico` aleatório (`concursos-` mais 8 caracteres de `secrets.token_hex` ou `/dev/urandom`). Explicar a instalação do app e a assinatura do tópico. Mandar um push de teste com `curl` e perguntar se chegou. Sem confirmação, não segue. Avisar que quem souber o tópico recebe os avisos.
-7. **Escolher o modo de execução** (pergunta com as três opções e os prós e contras de cada uma) e instalar conforme `references/modos.md`.
+7. **Escolher o modo de execução** (pergunta com as duas opções, GitHub Actions ou local, e os prós e contras de cada uma) e instalar conforme `references/modos.md`.
 8. **Fechar.** Resumir o perfil, o modo escolhido e como desligar.
 
 ## Modos de execução
 
-### Claude agendado
+### Claude agendado (fora da v1)
 
-- A skill `schedule` do Claude Code cria uma tarefa diária na conta do candidato, com o prompt de `references/agente-diario.md` e o perfil embutido.
-- O agente baixa `https://www.pciconcursos.com.br/concursos/`, separa os concursos novos e avalia cada um contra o `resumo`, as palavras-chave, os estados e o salário mínimo. Para cada compatível, manda um push com uma linha de motivo ("Analista de TI, nível superior: bate com sua formação em ADS").
-- Para saber o que já foi avisado, consulta o histórico do próprio tópico no ntfy (`/<topico>/json?poll=1&since=…`). O ntfy.sh guarda mensagens por cerca de 12h, então o agendamento roda a cada 12h.
-- **Pré-condição a validar no plano:** confirmar que a tarefa agendada em nuvem tem acesso à web e pode fazer POST no ntfy. Se não tiver, este modo sai da v1 e a skill oferece só os outros dois.
-- Contra: gasta uso do plano Claude a cada execução.
+Decidido em 2026-11-26: o modo fica fora da v1.
+
+- A deduplicação pelo histórico do ntfy não funciona. Um concurso fica semanas na página do PCI e o ntfy.sh guarda mensagens por cerca de 12h, então o mesmo concurso seria avisado de novo a cada execução.
+- O modo precisa de estado persistente, provavelmente o repositório privado do modo GitHub Actions. Isso ainda não foi validado, porque validar exige criar uma tarefa agendada e fazer push na conta do usuário.
+- O roteiro de validação está na Task 1 do plano `docs/superpowers/plans/2026-11-26-notifica-concurso.md`.
+
+Na v1, a análise por IA acontece só na configuração, no `perfil-concurso.pdf`. O aviso diário filtra por palavra-chave e estado.
 
 ### GitHub Actions
 
