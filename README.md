@@ -136,6 +136,17 @@ Rode `/concurso` de novo apontando para a pasta do concurso. O edital não é re
 
 Quando a busca na web falha num tópico, o conteúdo é gerado mesmo assim, com o aviso `⚠ conteúdo sem fonte web, conferir lei atualizada` no topo. A lista desses tópicos fica no `LEIA-ME.pdf`.
 
+## Aviso de concursos abertos
+
+Rode `/notifica-concurso` com o link do seu LinkedIn, do seu site ou o caminho do seu currículo em PDF. A skill:
+
+1. lê seu perfil e pergunta o que faltar (área, estados, salário mínimo);
+2. gera `perfil-concurso.pdf` com os cargos que combinam com você, seus pontos fortes, as lacunas a estudar e os concursos abertos hoje;
+3. configura o app **ntfy** no seu celular e manda um aviso de teste;
+4. instala um verificador que roda às 8h e às 18h, no GitHub Actions ou no seu computador, você escolhe.
+
+Rode `/notifica-concurso` de novo para editar o perfil ou desligar os avisos.
+
 ## Cuidados
 
 - **Leva tempo e consome bastante uso.** Todo o material sai de uma vez. Uma prova daqui a 90 dias significa 90 pastas com busca na web.
