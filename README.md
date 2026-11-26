@@ -5,6 +5,7 @@
 > Passe o edital, receba o plano de estudo inteiro até o dia da prova.
 > Para cada dia: o que estudar, o material reunido da web e um simulado
 > no estilo da banca, com gabarito comentado.
+> E, antes disso, um aviso no celular quando abrir um concurso que combina com você.
 
 [![Status](https://img.shields.io/badge/status-em%20desenvolvimento-orange)](docs/superpowers/specs/2026-11-23-concurso-skill-design.md)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin-d97757)](https://claude.com/claude-code)
@@ -23,6 +24,8 @@ O edital tem 80 páginas, a prova é daqui a três meses e a primeira semana vai
 - **Entrega um simulado por dia.** Questões no formato da banca: certo/errado no Cebraspe e cinco alternativas na FGV, FCC e Vunesp. O simulado cobra só o que você estudou naquele dia, e o gabarito comenta cada questão, citando o artigo.
 
 - **Tudo em arquivos simples.** Uma pasta por concurso, uma pasta por dia, material de estudo em PDF. Abra em qualquer leitor ou imprima. Nada fica preso dentro do chat.
+
+- **Avisa quando abre um concurso para você.** O `/notifica-concurso` lê seu LinkedIn, site ou currículo, aponta os cargos compatíveis com a sua formação e manda um push no celular (app ntfy) sempre que sair um edital que bate com seu perfil. A verificação roda duas vezes por dia, no GitHub Actions ou no seu computador.
 
 - **É honesta sobre os limites.** Conteúdo sem fonte web leva um aviso no topo. A data de geração fica registrada, porque a lei muda. Antes de começar, a skill mostra quantos dias vai gerar.
 
@@ -73,6 +76,15 @@ Na pasta onde quer guardar seus estudos, rode a skill com o edital:
 /concurso ~/Downloads/edital-inss-2026.pdf
 /concurso https://cdn.cebraspe.org.br/concursos/inss_26/arquivos/ED_1.PDF
 ```
+
+Para ser avisado de concursos abertos que combinam com você, rode com seu perfil:
+
+```
+/notifica-concurso https://www.linkedin.com/in/seu-perfil
+/notifica-concurso ~/Documentos/curriculo.pdf
+```
+
+O LinkedIn costuma bloquear a leitura sem login. Nesse caso a skill pede o PDF do perfil (no LinkedIn: **Mais** → **Salvar em PDF**). Você precisa do app **ntfy** no celular e, para rodar com o PC desligado, de uma conta no GitHub com o `gh` instalado.
 
 O único requisito é o Claude Code. O download por link usa o `curl` do sistema. Os PDFs são gerados com Chrome, Chromium, Edge ou Brave em modo headless, então um deles precisa estar instalado.
 
