@@ -1,0 +1,33 @@
+# Modelo copiado pela skill notifica-edital para o repositório privado do candidato (.github/workflows/).
+name: vigia de edital
+
+on:
+  schedule:
+    - cron: "0 11,21 * * *" # 08h e 18h em Brasília
+  workflow_dispatch:
+
+concurrency: vigia-edital
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Estado vive no cache, não em commit. Cache perdido = semeia de novo sem notificar.
+      - uses: actions/cache/restore@v4
+        with:
+          path: vistos-edital.json
+          key: vistos-edital-${{ github.run_id }}
+          restore-keys: vistos-edital-
+
+      - run: python3 vigia_edital.py
+        env:
+          VIGIAS: ${{ secrets.VIGIAS }}
+
+      # Salva mesmo se uma vigia falhou, para não perder o estado das outras.
+      - if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: vistos-edital.json
+          key: vistos-edital-${{ github.run_id }}

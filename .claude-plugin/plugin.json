@@ -1,6 +1,6 @@
 {
   "name": "concurso",
-  "description": "Lê o edital de um concurso público e gera cronograma diário, conteúdo da web e simulado com gabarito para cada dia até a prova. Também avisa no celular quando abre um concurso compatível com o seu perfil.",
+  "description": "Lê o edital de um concurso público e gera cronograma diário, conteúdo da web e simulado com gabarito para cada dia até a prova. Também avisa no celular quando abre um concurso compatível com o seu perfil ou quando sai o edital que você está esperando.",
   "author": { "name": "guglieelmor" },
   "repository": "https://github.com/guglieelmor/estudo-concurso",
   "keywords": ["concurso", "edital", "estudo", "simulado", "cronograma", "notificacao"]

@@ -5,7 +5,8 @@
 > Passe o edital, receba o plano de estudo inteiro até o dia da prova.
 > Para cada dia: o que estudar, o material reunido da web e um simulado
 > no estilo da banca, com gabarito comentado.
-> E, antes disso, um aviso no celular quando abrir um concurso que combina com você.
+> E, antes disso, um aviso no celular quando abrir um concurso que combina com você
+> ou quando sair o edital que você está esperando.
 
 [![Status](https://img.shields.io/badge/status-em%20desenvolvimento-orange)](docs/superpowers/specs/2026-11-23-concurso-skill-design.md)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin-d97757)](https://claude.com/claude-code)
@@ -13,7 +14,7 @@
 
 ## Por que usar
 
-O edital tem 80 páginas, a prova é daqui a três meses e a primeira semana vai embora montando planilha. Esta skill faz esse trabalho por você.
+O edital tem 80 páginas, a prova é daqui a três meses e a primeira semana vai embora montando planilha. Este plugin faz esse trabalho por você, e ainda avisa quando é hora de começar.
 
 - **Lê o edital por você.** O PDF, local ou por link, vira um resumo com o que importa: cargo, banca, data, matérias com número de questões e peso, conteúdo programático e as regras que mudam a estratégia, como a errada que anula a certa no Cebraspe.
 
@@ -26,6 +27,8 @@ O edital tem 80 páginas, a prova é daqui a três meses e a primeira semana vai
 - **Tudo em arquivos simples.** Uma pasta por concurso, uma pasta por dia, material de estudo em PDF. Abra em qualquer leitor ou imprima. Nada fica preso dentro do chat.
 
 - **Avisa quando abre um concurso para você.** O `/notifica-concurso` lê seu LinkedIn, site ou currículo, aponta os cargos compatíveis com a sua formação e manda um push no celular (app ntfy) sempre que sair um edital que bate com seu perfil. A verificação roda duas vezes por dia, no GitHub Actions ou no seu computador.
+
+- **Avisa quando sai o edital que você espera.** O `/notifica-edital` vigia o site que você indicar (portal de concursos, página da banca ou do órgão) e manda um push no celular assim que aparece o edital do concurso que você quer, como o da PF ou do TRF.
 
 - **É honesta sobre os limites.** Conteúdo sem fonte web leva um aviso no topo. A data de geração fica registrada, porque a lei muda. Antes de começar, a skill mostra quantos dias vai gerar.
 
@@ -82,6 +85,12 @@ Para ser avisado de concursos abertos que combinam com você, rode com seu perfi
 ```
 /notifica-concurso https://www.linkedin.com/in/seu-perfil
 /notifica-concurso ~/Documentos/curriculo.pdf
+```
+
+Para ser avisado quando sair o edital de um concurso específico, diga onde olhar e qual edital:
+
+```
+/notifica-edital https://www.pciconcursos.com.br/noticias/ edital da Polícia Federal para Agente
 ```
 
 O LinkedIn costuma bloquear a leitura sem login. Nesse caso a skill pede o PDF do perfil (no LinkedIn: **Mais** → **Salvar em PDF**). Você precisa do app **ntfy** no celular e, para rodar com o PC desligado, de uma conta no GitHub com o `gh` instalado.
@@ -159,9 +168,20 @@ Rode `/notifica-concurso` com o link do seu LinkedIn, do seu site ou o caminho d
 
 Rode `/notifica-concurso` de novo para editar o perfil ou desligar os avisos.
 
+## Aviso de edital específico
+
+Rode `/notifica-edital` com o link do site onde o edital vai ser publicado e o concurso que você espera. A skill:
+
+1. monta os termos de busca (nome do órgão e sigla, cargo, estado) e testa no site, mostrando o que combinaria hoje. Se o edital já saiu, você fica sabendo na hora;
+2. configura o app **ntfy** (pode usar o mesmo tópico do `/notifica-concurso`) e manda um aviso de teste;
+3. instala um verificador que roda às 8h e às 18h, no GitHub Actions ou no seu computador.
+
+Dá para acompanhar vários editais: rode `/notifica-edital` de novo para adicionar, remover ou desligar. Sites que montam a página com JavaScript não funcionam; nesse caso a skill sugere outra página.
+
 ## Cuidados
 
 - **Leva tempo e consome bastante uso.** Todo o material sai de uma vez. Uma prova daqui a 90 dias significa 90 pastas com busca na web.
 - **A lei muda.** O conteúdo reflete a data em que foi gerado. Perto da prova, confira na fonte oficial os artigos mais cobrados.
 - **PDF escaneado** (imagem, sem texto) ainda não é suportado. Nesse caso a skill avisa e para.
+- **Os avisos dependem do site.** O `/notifica-edital` lê a página como ela chega do servidor. Se o site mudar de layout, bloquear robôs ou montar a página com JavaScript, o aviso pode não chegar. A verificação acusa erro quando a página vem sem links, mas confira o site de vez em quando para o concurso que mais importa.
 - **O material é um apoio.** Não substitui o edital oficial nem a leitura da lei seca.
