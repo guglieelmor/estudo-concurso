@@ -5,22 +5,31 @@
 
 ## GitHub Actions (`modo: "github"`)
 
-1. `gh auth status`. Se o `gh` não existir, peça para instalar em https://cli.github.com. Se falhar, peça ao candidato para rodar `! gh auth login` e espere.
-2. Crie o repositório num diretório temporário:
+1. `gh auth status`. Se o `gh` não existir, peça para instalar em https://cli.github.com. Se falhar, peça ao candidato para rodar `! gh auth login -s workflow` e espere. Se `Token scopes` não tiver `workflow` (o push do `.yml` é recusado sem ele), peça `! gh auth refresh -s workflow`.
+2. Prepare o repositório único `notifica-estudo-concurso`, compartilhado por todas as skills de aviso (cada uma tem o próprio script, workflow e secret lá dentro). Num diretório temporário:
    ```bash
    T=$(mktemp -d) && cd "$T"
-   gh repo create notifica-concurso --private --clone && cd notifica-concurso
+   if gh repo view notifica-estudo-concurso >/dev/null 2>&1; then gh repo clone notifica-estudo-concurso; else gh repo create notifica-estudo-concurso --private --clone; fi
+   cd notifica-estudo-concurso
+   ```
+   Se o repositório já existia, confira `gh repo view notifica-estudo-concurso --json visibility -q .visibility` e **pare** se não for `PRIVATE`. Mexa só nos seus arquivos; os de outras skills (`notificador.py`, `vigia_edital.py` e seus `.yml`) ficam como estão.
+   ```bash
    cp "<notificador>/notificador.py" .
    mkdir -p .github/workflows && cp "<notificador>/notificador.yml" .github/workflows/
-   git add . && git commit -m "notificador de concursos" && git push -u origin HEAD
+   git add notificador.py .github/workflows/notificador.yml
+   git diff --cached --quiet || git commit -m "notificador de concursos"
+   git push -u origin HEAD
    ```
-   Se o repositório já existir (erro "Name already exists"), use `gh repo clone notifica-concurso`, confira `gh repo view notifica-concurso --json visibility -q .visibility` e pare se não for `PRIVATE`; sobrescreva os dois arquivos e faça push.
 3. Secret com o perfil (lista com um item):
    ```bash
-   python3 -c "import json,sys; print(json.dumps([json.load(open(sys.argv[1]))]))" <cfg>/perfil.json | gh secret set USUARIOS -R "$(gh api user -q .login)/notifica-concurso"
+   python3 -c "import json,sys; print(json.dumps([json.load(open(sys.argv[1]))]))" <cfg>/perfil.json | gh secret set USUARIOS -R "$(gh api user -q .login)/notifica-estudo-concurso"
    ```
-4. `gh workflow run notificador.yml -R <login>/notifica-concurso`. Espere cerca de 1 minuto e rode `gh run list -R <login>/notifica-concurso -L 1`. Tem que dar `completed success`. Essa execução só semeia.
-5. Desligar: `gh workflow disable notificador.yml -R <login>/notifica-concurso`.
+4. `gh workflow run notificador.yml -R <login>/notifica-estudo-concurso`. Espere cerca de 1 minuto e rode `gh run list -R <login>/notifica-estudo-concurso -L 1`. Tem que dar `completed success`. Essa execução só semeia.
+5. Desligar: `gh workflow disable notificador.yml -R <login>/notifica-estudo-concurso` e `gh secret delete USUARIOS -R <login>/notifica-estudo-concurso`. Só este aviso: os de outras skills no mesmo repositório continuam.
+
+### Repositório antigo `notifica-concurso`
+
+Versões anteriores criavam um repositório só para esta skill. Se `gh repo view notifica-concurso` existir, ofereça migrar: faça os passos 2 a 4 acima (repositório `notifica-estudo-concurso`) e depois desligue o antigo com `gh workflow disable notificador.yml -R <login>/notifica-concurso`. Não apague o repositório antigo por conta própria; diga ao candidato que, conferido o novo, ele pode apagá-lo no GitHub em Settings → Delete this repository.
 
 ## Local (`modo: "local"`)
 

@@ -20,6 +20,8 @@ Se `<cfg>/perfil.json` existir, mostre o resumo, as palavras, os estados e o mod
 
 Em editar/recomeçar: se o modo mudar, rode antes o "Desligar" do modo anterior; no modo github, sempre regrave o secret (passo 3 de `references/modos.md`). No modo local, o script lê o `perfil.json` direto, nada a refazer.
 
+Modo github: os avisos de todas as skills ficam num único repositório privado, `notifica-estudo-concurso`. Se o candidato ainda tiver o repositório antigo desta skill, ofereça migrar (seção "Repositório antigo" de `references/modos.md`).
+
 ## Fases
 
 1. **Perfil.** Sem argumento, peça: "Me passe o link do seu LinkedIn, do seu site pessoal ou o caminho do seu currículo em PDF." Leia conforme `references/perfil.md`.

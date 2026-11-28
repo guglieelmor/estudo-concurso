@@ -1,4 +1,4 @@
-# Modelo copiado pela skill notifica-edital para o repositório privado do candidato (.github/workflows/).
+# Modelo copiado pela skill notifica-edital para o repositório privado notifica-estudo-concurso do candidato (.github/workflows/).
 name: vigia de edital
 
 on:
@@ -18,8 +18,8 @@ jobs:
       - uses: actions/cache/restore@v4
         with:
           path: vistos-edital.json
-          key: vistos-edital-${{ github.run_id }}
-          restore-keys: vistos-edital-
+          key: edital-vistos-${{ github.run_id }}
+          restore-keys: edital-vistos-
 
       - run: python3 vigia_edital.py
         env:
@@ -30,4 +30,4 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: vistos-edital.json
-          key: vistos-edital-${{ github.run_id }}
+          key: edital-vistos-${{ github.run_id }}

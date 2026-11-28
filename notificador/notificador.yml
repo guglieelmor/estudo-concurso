@@ -1,4 +1,4 @@
-# Modelo copiado pela skill notifica-concurso para o repositório privado do candidato (.github/workflows/).
+# Modelo copiado pela skill notifica-concurso para o repositório privado notifica-estudo-concurso do candidato (.github/workflows/).
 name: notificador de concursos
 
 on:

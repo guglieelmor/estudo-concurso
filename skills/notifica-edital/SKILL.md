@@ -20,6 +20,8 @@ Se `<cfg>/vigias.json` existir, mostre as vigias numa tabela (nome, site, termos
 - Se o argumento trouxer site e edital, vá direto à fase 1 para **adicionar** uma vigia.
 - Sem argumento, pergunte: **adicionar** vigia, **remover** vigia (apague do `vigias.json` e vá à fase 6), **desligar tudo** (procedimento "Desligar" do modo em `references/modos.md`, depois apague `<cfg>`).
 
+Modo github: os avisos de todas as skills ficam num único repositório privado, `notifica-estudo-concurso`. Se o candidato ainda tiver o repositório antigo desta skill, ofereça migrar (seção "Repositório antigo" de `references/modos.md`).
+
 ## Fases
 
 1. **Site e edital.** Do argumento, separe a URL do site e a descrição do edital. Faltando algo, pergunte, uma coisa por vez: "Qual o link do site onde o edital vai ser publicado?" e "Qual edital você quer acompanhar? (órgão, cargo, ano, se souber)".

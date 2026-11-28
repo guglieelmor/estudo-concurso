@@ -97,7 +97,7 @@ Para ser avisado quando sair o edital de um concurso específico, diga onde olha
 /notifica-edital https://www.pciconcursos.com.br/noticias/ edital da Polícia Federal para Agente
 ```
 
-O LinkedIn costuma bloquear a leitura sem login. Nesse caso a skill pede o PDF do perfil (no LinkedIn: **Mais** → **Salvar em PDF**). Você precisa do app **ntfy** no celular e, para rodar com o PC desligado, de uma conta no GitHub com o `gh` instalado.
+O LinkedIn costuma bloquear a leitura sem login. Nesse caso a skill pede o PDF do perfil (no LinkedIn: **Mais** → **Salvar em PDF**). Os avisos precisam de uma preparação rápida: veja [Antes de criar avisos](#antes-de-criar-avisos).
 
 O único requisito é o Claude Code. O download por link usa o `curl` do sistema. Os PDFs são gerados com Chrome, Chromium, Edge ou Brave em modo headless, então um deles precisa estar instalado.
 
@@ -160,6 +160,71 @@ Os cronogramas não se coordenam entre si. Se você estudar para os dois ao mesm
 Rode `/concurso` de novo apontando para a pasta do concurso. O edital não é relido, e os dias que já estão completos são pulados. Só os dias que faltam são gerados.
 
 Quando a busca na web falha num tópico, o conteúdo é gerado mesmo assim, com o aviso `⚠ conteúdo sem fonte web, conferir lei atualizada` no topo. A lista desses tópicos fica no `LEIA-ME.pdf`.
+
+## Antes de criar avisos
+
+O `/notifica-concurso` e o `/notifica-edital` mandam push no celular e instalam um verificador que roda sozinho. A skill conduz tudo, mas deixe isto pronto antes para não parar no meio.
+
+### 1. App ntfy no celular
+
+O [ntfy](https://ntfy.sh) é um app gratuito e sem cadastro que recebe notificações. O aviso chega por um **tópico**, um nome que funciona como canal.
+
+1. Instale o **ntfy** pela [Play Store](https://play.google.com/store/apps/details?id=io.heckel.ntfy), pela [App Store](https://apps.apple.com/app/ntfy/id1625396347) ou pelo [F-Droid](https://f-droid.org/packages/io.heckel.ntfy/).
+2. Abra o app e permita notificações.
+3. **Não crie tópico ainda.** A skill gera um nome aleatório (`concursos-1a2b3c4d` ou `editais-1a2b3c4d`) e pede para você tocar em **+** e assinar esse nome.
+4. A skill manda um aviso de teste e só continua depois que você confirmar que ele chegou.
+
+Cuidados:
+- **O tópico é a senha.** O servidor público ntfy.sh não tem login: quem souber o nome recebe seus avisos. Não poste o nome nem o coloque em repositório público.
+- **Android:** se o aviso atrasar ou não chegar, tire o ntfy da otimização de bateria (Configurações → Apps → ntfy → Bateria → Sem restrições).
+- Os dois comandos podem usar o mesmo tópico. O `/notifica-edital` oferece reaproveitar o do `/notifica-concurso`.
+
+### 2. Onde o verificador vai rodar
+
+O verificador confere os sites às 8h e às 18h. A skill pergunta onde instalar:
+
+| | GitHub Actions | No seu computador |
+|---|---|---|
+| Roda com o PC desligado | sim | não |
+| Precisa de conta | GitHub (grátis) | nenhuma |
+| Precisa instalar | `gh` (GitHub CLI) | Python 3 |
+| Gasta seu plano Claude | não | não |
+| Site que bloqueia servidores | pode falhar | costuma funcionar |
+
+Na dúvida, escolha **GitHub Actions**: aviso de edital só serve se chegar no dia.
+
+### 3a. Preparar o GitHub Actions
+
+1. Crie uma conta em [github.com](https://github.com/signup), se ainda não tiver.
+2. Instale o GitHub CLI:
+   - Windows: `winget install --id GitHub.cli`
+   - macOS: `brew install gh`
+   - Linux: veja [cli.github.com](https://cli.github.com) (Debian/Ubuntu: `sudo apt install gh`)
+3. Faça login com permissão para criar workflows. No Claude Code, rode:
+   ```
+   ! gh auth login -s workflow
+   ```
+   Responda **GitHub.com**, **HTTPS**, **Yes** (autenticar o Git) e **Login with a web browser**. Copie o código mostrado e cole na página que abrir.
+4. Confira com `! gh auth status`. A linha `Token scopes` precisa ter `repo` e `workflow`. Se você já estava logado sem `workflow`, rode `! gh auth refresh -s workflow`.
+
+Todos os avisos ficam num único repositório **privado** na sua conta, o `notifica-estudo-concurso`. A primeira skill que você configurar cria o repositório; as outras só acrescentam o verificador delas. Cada aviso tem o próprio workflow (`notificador.yml` para concursos, `vigia_edital.yml` para editais) e guarda seu perfil ou suas vigias num *secret* próprio, que não aparece no código. Desligar um aviso não afeta os outros.
+
+Se você configurou antes dessa mudança e tem os repositórios `notifica-concurso` ou `notifica-edital`, rode o comando de novo: a skill oferece mover o aviso para o `notifica-estudo-concurso` e desliga o antigo. Cada execução leva menos de um minuto; duas por dia ficam bem dentro dos 2.000 minutos mensais grátis do GitHub para repositórios privados.
+
+Se uma execução falhar (site fora do ar, página mudou), o GitHub manda um e-mail. Para ver o histórico: aba **Actions** do repositório.
+
+### 3b. Preparar o seu computador
+
+Só precisa do Python 3, sem bibliotecas extras.
+- Windows: `winget install Python.Python.3.12` (ou [python.org](https://www.python.org/downloads/), marcando **Add python.exe to PATH**). Confira com `py --version`.
+- macOS: já vem com `python3`; se pedir, aceite instalar as ferramentas de linha de comando.
+- Linux: já vem instalado na maioria das distribuições (`python3 --version`).
+
+A skill registra o verificador no agendador do sistema (systemd no Linux, launchd no macOS, Agendador de Tarefas no Windows) e guarda a configuração em `~/.config/notifica-concurso/` ou `~/.config/notifica-edital/`. Se o computador estiver desligado ou dormindo às 8h ou 18h: no Linux a verificação roda quando ele ligar; no macOS, quando acordar do repouso (desligado, pula); no Windows, pula aquele horário.
+
+### Editar ou desligar
+
+Rode o mesmo comando de novo (`/notifica-concurso` ou `/notifica-edital`) sem argumento. A skill mostra o que está configurado e oferece editar, adicionar, remover ou desligar. Desligar remove o agendamento (ou desativa o workflow no GitHub) e apaga a configuração local.
 
 ## Aviso de concursos abertos
 
