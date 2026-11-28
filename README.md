@@ -56,6 +56,8 @@ claude plugin marketplace add guglieelmor/estudo-concurso
 claude plugin install concurso@estudo-concurso
 ```
 
+Se o Claude Code já estava aberto, rode `/reload-plugins` para carregar as skills sem reiniciar a sessão.
+
 ### Mantenha a skill sempre atualizada
 
 O Claude Code só atualiza sozinho os marketplaces oficiais da Anthropic. Para marketplaces de terceiros, como este, o auto-update vem desligado. Ative uma vez:
@@ -64,7 +66,7 @@ O Claude Code só atualiza sozinho os marketplaces oficiais da Anthropic. Para m
 2. Abra a aba **Marketplaces** e selecione `estudo-concurso`.
 3. Escolha **Enable auto-update**.
 
-A partir daí, o Claude Code busca a versão nova ao iniciar e avisa quando houver atualização. Reinicie a sessão para carregá-la.
+A partir daí, o Claude Code busca a versão nova ao iniciar e avisa quando houver atualização. Rode `/reload-plugins` para carregá-la sem reiniciar a sessão.
 
 Para atualizar na mão, a qualquer momento:
 
@@ -72,6 +74,8 @@ Para atualizar na mão, a qualquer momento:
 claude plugin marketplace update estudo-concurso
 claude plugin update concurso@estudo-concurso
 ```
+
+Depois rode `/reload-plugins` no Claude Code para usar a versão nova.
 
 Na pasta onde quer guardar seus estudos, rode a skill com o edital:
 
